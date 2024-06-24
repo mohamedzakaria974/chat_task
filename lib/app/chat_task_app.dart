@@ -1,4 +1,5 @@
 import 'package:chat_task/core/di/di.dart' as di;
+import 'package:chat_task/core/theme/app_colors.dart';
 import 'package:chat_task/core/theme/app_theme.dart';
 import 'package:chat_task/features/auth/presentation/pages/login_page.dart';
 import 'package:chat_task/features/landing/presentation/pages/landing_page.dart';
@@ -32,6 +33,13 @@ class ChatTaskApp extends StatelessWidget {
         home: BlocBuilder<AuthBloc, AuthState>(builder: (context, state) {
           if (state is AuthLoggedInState) {
             return LandingScreen();
+          } else if (state is AuthInitial) {
+            return const DecoratedBox(
+              decoration: BoxDecoration(color: AppColors.white),
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
           } else {
             return const LoginPage();
           }

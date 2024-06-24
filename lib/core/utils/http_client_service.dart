@@ -4,6 +4,7 @@ import 'package:chat_task/core/constants/api_consts.dart';
 import 'package:chat_task/core/errors/app_exception.dart';
 import 'package:dio/dio.dart';
 
+//coverage:ignore-file
 class HttpClientService {
   final Dio _dio = Dio();
 

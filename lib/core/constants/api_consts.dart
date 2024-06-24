@@ -1,6 +1,4 @@
-class ApiConsts {
-  ApiConsts._();
-
+abstract class ApiConsts {
   static const String kBaseUrl = 'https://mobile-dev-assignment.fly.dev/';
 
   //endpoints

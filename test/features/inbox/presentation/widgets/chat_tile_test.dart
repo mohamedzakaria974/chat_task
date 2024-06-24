@@ -1,4 +1,5 @@
 import 'package:chat_task/core/utils/bites_icons.dart';
+import 'package:chat_task/features/chat/presentation/pages/chat_page.dart';
 import 'package:chat_task/features/inbox/presentation/widgets/chat_tile.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -21,6 +22,10 @@ void main() {
 
       final titleFinder = find.text('عنوان المحادثة');
       expect(titleFinder, findsOneWidget);
+      await tester.tap(titleFinder);
+      await tester.pumpAndSettle();
+      final chatPageFinder = find.byType(ChatPage);
+      expect(chatPageFinder, findsOneWidget);
     },
   );
 }

@@ -18,6 +18,8 @@ void main() {
           create: (_) => di.locator<AuthBloc>()..add(CheckLoggingInEvent()),
           child: const LoginPage())));
 
+      final loginPageFinder = find.byType(LoginPage);
+      expect(loginPageFinder, findsOneWidget);
       final logoFinder = find.byType(Image);
       expect(logoFinder, findsOneWidget);
       Image logoImgWidget = logoFinder.evaluate().first.widget as Image;
@@ -31,7 +33,9 @@ void main() {
           googleIconFinder.evaluate().first.widget as SvgPicture;
       expect((googleSvgImage.bytesLoader as SvgAssetLoader).assetName,
           Assets.kGoogle);
-
+      await tester.tap(googleIconFinder);
+      await tester.pumpAndSettle();
+      expect(loginPageFinder, findsOneWidget);
       final emailTextFinder = find.text(Strings.kEmail);
       expect(emailTextFinder, findsOneWidget);
       final passwordTextFinder = find.text(Strings.kPassword);

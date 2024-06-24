@@ -1,8 +1,6 @@
 import 'package:chat_task/core/constants/failure_messages.dart';
 
-class Validator {
-  Validator._();
-
+abstract class Validator {
   static String? requiredFieldValidator(String? text) {
     return text != null && text.trim().isNotEmpty ? null : kRequiredField;
   }

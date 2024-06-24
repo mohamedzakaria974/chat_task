@@ -1,8 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-class BitesIcons {
-  BitesIcons._();
-
+abstract class BitesIcons {
   static const _kFontFamily = 'Bites';
   static const String? _kFontPkg = null;
 

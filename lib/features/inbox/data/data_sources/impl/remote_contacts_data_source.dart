@@ -2,7 +2,7 @@ import 'package:chat_task/core/constants/api_consts.dart';
 import 'package:chat_task/core/errors/app_exception.dart';
 import 'package:chat_task/core/utils/http_client_service.dart';
 import 'package:chat_task/features/inbox/data/data_sources/interface/contacts_data_source.dart';
-import 'package:chat_task/features/inbox/data/models/ContactModel.dart';
+import 'package:chat_task/features/inbox/data/models/contact_model.dart';
 
 class RemoteContactsDataSource implements IContactsDataSource {
   final HttpClientService _client;

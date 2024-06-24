@@ -1,7 +1,7 @@
 import 'package:chat_task/core/constants/api_consts.dart';
 import 'package:chat_task/core/utils/http_client_service.dart';
 import 'package:chat_task/features/inbox/data/data_sources/impl/remote_contacts_data_source.dart';
-import 'package:chat_task/features/inbox/data/models/ContactModel.dart';
+import 'package:chat_task/features/inbox/data/models/contact_model.dart';
 import 'package:chat_task/features/inbox/data/repositories/contacts_repository.dart';
 import 'package:chat_task/features/inbox/domain/entities/contact_entity.dart';
 import 'package:chat_task/features/inbox/domain/use_cases/get_contacts_list_use_case.dart';

@@ -29,6 +29,7 @@ void main() {
       email: 'email',
       password: 'password',
     );
+    const token = 'test-token';
     setUp(() {
       client = MockHttpClientService();
       dataSource = RemoteAuthDataSource(client);
@@ -42,10 +43,7 @@ void main() {
       when(client.post(
         ApiConsts.kLogin,
         data: anyNamed('data'),
-      )).thenAnswer((_) async => {"token": "test-token"});
-
-      when(storageService.write(kTokenKey, 'test-token'))
-          .thenAnswer((_) async {});
+      )).thenAnswer((_) async => {"token": token});
     });
 
     test(' have initial state as [AuthInitial] when initialized', () {
@@ -68,8 +66,7 @@ void main() {
     blocTest<AuthBloc, AuthState>(
       'emit [AuthLoggedInState] when [CheckLoggingInEvent] event occurs',
       setUp: () {
-        when(storageService.read(kTokenKey))
-            .thenAnswer((_) async => 'test-token');
+        when(storageService.read(kTokenKey)).thenAnswer((_) async => token);
       },
       build: () => authBloc,
       wait: Durations.short1,
@@ -83,8 +80,8 @@ void main() {
       'emit [ AuthLoadingState(), AuthLoggedInState()] '
       'when [LoginEvent] event occurs',
       setUp: () {
-        when(storageService.read(kTokenKey))
-            .thenAnswer((_) async => 'test-token');
+        when(storageService.write(kTokenKey, token))
+            .thenAnswer((_) async => {});
       },
       build: () => authBloc,
       wait: Durations.short1,
@@ -92,6 +89,40 @@ void main() {
       expect: () => [
         AuthLoadingState(),
         AuthLoggedInState(),
+      ],
+    );
+
+    blocTest<AuthBloc, AuthState>(
+      'emit [ AuthLoadingState(), AuthErrorState()] '
+      'when [LoginEvent] event occurs if login with backend failed',
+      setUp: () {
+        when(client.post(
+          ApiConsts.kLogin,
+          data: anyNamed('data'),
+        )).thenThrow((_) => Exception());
+      },
+      build: () => authBloc,
+      wait: Durations.short1,
+      act: (b) => b.add(LoginEvent(loginEntity: loginModel)),
+      expect: () => [
+        AuthLoadingState(),
+        AuthErrorState(message: 'something went wrong'),
+      ],
+    );
+
+    blocTest<AuthBloc, AuthState>(
+      'emit [ AuthLoadingState(), AuthErrorState()] '
+      'when [LoginEvent] event occurs if failed to write in storage',
+      setUp: () {
+        when(storageService.write(kTokenKey, token))
+            .thenThrow((_) => Exception());
+      },
+      build: () => authBloc,
+      wait: Durations.short1,
+      act: (b) => b.add(LoginEvent(loginEntity: loginModel)),
+      expect: () => [
+        AuthLoadingState(),
+        AuthErrorState(message: 'something went wrong'),
       ],
     );
   });

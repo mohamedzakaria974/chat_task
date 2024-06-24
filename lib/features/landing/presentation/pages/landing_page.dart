@@ -1,3 +1,4 @@
+import 'package:chat_task/core/constants/widget_keys.dart' as keys;
 import 'package:chat_task/core/theme/app_colors.dart';
 import 'package:chat_task/features/inbox/presentation/pages/inbox_page.dart';
 import 'package:chat_task/features/landing/presentation/widgets/bottom_nav_bar.dart';
@@ -17,6 +18,7 @@ class LandingScreen extends StatelessWidget {
       backgroundColor: Theme.of(context).colorScheme.background,
       bottomNavigationBar: const BottomNavBar(),
       body: Container(
+        key: keys.kGradientContainerKey,
         width: MediaQuery.sizeOf(context).width,
         height: MediaQuery.sizeOf(context).height,
         decoration: BoxDecoration(

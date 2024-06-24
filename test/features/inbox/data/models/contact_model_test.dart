@@ -1,4 +1,4 @@
-import 'package:chat_task/features/inbox/data/models/ContactModel.dart';
+import 'package:chat_task/features/inbox/data/models/contact_model.dart';
 import 'package:chat_task/features/inbox/domain/entities/contact_entity.dart';
 import 'package:test/test.dart';
 

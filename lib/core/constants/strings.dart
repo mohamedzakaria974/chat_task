@@ -1,6 +1,4 @@
-class Strings {
-  Strings._();
-
+abstract class Strings {
   static const String kUsage = 'استخدام';
   static const String kEmail = 'البريد الإلكترونى';
   static const String kPassword = 'كلمة المرور';
